@@ -3,9 +3,11 @@ require("dotenv").config();
 const connectDB = require('./config/db.js');
 const app = express();
 const PORT = process.env.PORT;
+const cors = require('cors');
 const noteRoutes = require('./routes/noteRoutes');
 app.use(express.json());
 connectDB();
+app.use(cors());
 app.get('/',(req,res)=>{
     res.json({
         message:"Welcome"
