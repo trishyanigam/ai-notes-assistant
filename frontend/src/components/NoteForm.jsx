@@ -6,7 +6,7 @@ function NoteForm({fetchNotes}) {
   const [title,setTitle] = useState("");
   const [content,setContent] = useState("");
   const handleSubmit = async(e)=>{
-    e.preventDefault();
+    // e.preventDefault();
     try{
       await api.post('/notes',{
         title,

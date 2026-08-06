@@ -7,6 +7,7 @@ import NoteList from '../components/NoteList'
 
 function Home() {
   const[notes,setNotes] = useState([]);
+  const[search,setSearch] = useState("");
   const fetchNotes = async () =>{
     try
     {
@@ -18,14 +19,22 @@ function Home() {
       console.log(err);
     }
   }
+
   useEffect(()=>{
     fetchNotes();
   },[]);
+
+  const filteredNotes = notes.filter((note)=>{
+    return(
+      note.title.toLowerCase().includes(search.toLowerCase()) ||
+      note.content.toLowerCase().includes(search.toLowerCase())
+    );
+  });
   return (
     <div className='max-w-5xl mx-auto p-6'>
         <NoteForm fetchNotes={fetchNotes}/>
-        <SearchBar/>
-        <NoteList notes={notes} fetchNotes={fetchNotes}/>
+        <SearchBar search={search} setSearch={setSearch}/>
+        <NoteList notes={filteredNotes} fetchNotes={fetchNotes}/>
     </div>
   )
 }

@@ -5,6 +5,7 @@ const app = express();
 const PORT = process.env.PORT;
 const cors = require('cors');
 const noteRoutes = require('./routes/noteRoutes');
+const aiRoutes = require('./routes/aiRoutes.js');
 app.use(express.json());
 connectDB();
 app.use(cors());
@@ -20,6 +21,7 @@ app.get('/health',(req,res)=>{
     });
 });
 app.use("/api/notes",noteRoutes);
+app.use("/api/ai",aiRoutes);
 app.listen(PORT,()=>{
     console.log(`Server running on http://localhost:${PORT}`);
 });
